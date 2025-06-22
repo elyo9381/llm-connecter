@@ -1,0 +1,63 @@
+spring:
+  application:
+    name: ai-chatbot-service
+  
+  datasource:
+    url: jdbc:postgresql://postgres:5432/chatbot_db
+    username: chatbot_user
+    password: chatbot_password
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    defer-datasource-initialization: true
+  
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+
+# AI 서비스 설정
+ai:
+  openai:
+    enabled: false
+    api-key: ${OPENAI_API_KEY:dummy-key}
+    base-url: https://api.openai.com/v1
+    
+  gemini:
+    enabled: true
+    api-key: ${GEMINI_API_KEY:jKjKjKjKjKjKjKjKjKjKjKjKjKj}
+    base-url: https://generativelanguage.googleapis.com
+
+# JWT 설정
+jwt:
+  secret: ${JWT_SECRET:mySecretKeyForJWTTokenGenerationThatShouldBeLongEnoughForSecurity}
+  expiration: 86400000 # 24시간
+
+# 서버 설정
+server:
+  port: 8080
+
+# 로깅 설정
+logging:
+  level:
+    com.kafibara.chatbot: INFO
+    org.springframework.security: INFO
+    org.hibernate.SQL: INFO
+    org.hibernate.type.descriptor.sql.BasicBinder: INFO
+
+# 관리 엔드포인트 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics
+  endpoint:
+    health:
+      show-details: always

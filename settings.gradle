@@ -1,0 +1,10 @@
+// 플러그인 관리 (맨 위에 위치해야 함)
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        mavenCentral()
+    }
+}
+
+// 프로젝트 이름 설정
+rootProject.name = 'custom-chatbot'

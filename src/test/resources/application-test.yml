@@ -1,0 +1,44 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:testdb;MODE=PostgreSQL;DATABASE_TO_LOWER=TRUE;DEFAULT_NULL_ORDERING=HIGH
+    driver-class-name: org.h2.Driver
+    username: sa
+    password: 
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.H2Dialect
+        format_sql: false
+  
+  h2:
+    console:
+      enabled: true
+  
+  security:
+    jwt:
+      secret: test-secret-key-for-testing-purposes-only
+      expiration: 3600000 # 1시간
+
+# AI 서비스 설정 (테스트용)
+ai:
+  mock:
+    enabled: true
+  
+  openai:
+    api-key: test-openai-key
+    base-url: https://api.openai.com/v1
+  
+  claude:
+    api-key: test-claude-key
+    base-url: https://api.anthropic.com
+
+# 로깅 설정
+logging:
+  level:
+    com.kafibara.chatbot: INFO
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN

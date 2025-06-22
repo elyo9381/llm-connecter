@@ -1,0 +1,107 @@
+spring:
+  application:
+    name: custom-chatbot
+  
+  datasource:
+    url: jdbc:postgresql://localhost:5432/chatbot_db
+    username: ${DB_USERNAME:chatbot_user}
+    password: ${DB_PASSWORD:password}
+    driver-class-name: org.postgresql.Driver
+  
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+    show-sql: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    open-in-view: false
+  
+  data:
+    jpa:
+      repositories:
+        enabled: true
+  
+  security:
+    jwt:
+      secret: ${JWT_SECRET:your-very-long-secret-key-here-make-it-at-least-64-characters-long-for-hs512-algorithm-security-requirements-development-only}
+      expiration: 86400000 # 24시간
+
+# AI 서비스 설정
+ai:
+  # Mock AI 서비스 (테스트용)
+  mock:
+    enabled: true
+  
+  # OpenAI 설정
+  openai:
+    enabled: ${OPENAI_ENABLED:true}
+    api-key: ${OPENAI_API_KEY:your-openai-api-key}
+    base-url: https://api.openai.com/v1
+  
+  # Claude 설정
+  claude:
+    enabled: ${CLAUDE_ENABLED:false}
+    api-key: ${CLAUDE_API_KEY:your-claude-api-key}
+    base-url: https://api.anthropic.com
+  
+  # Gemini 설정
+  gemini:
+    enabled: ${GEMINI_ENABLED:false}
+    api-key: ${GEMINI_API_KEY:your-gemini-api-key}
+    base-url: https://generativelanguage.googleapis.com
+
+# 로깅 설정
+logging:
+  level:
+    com.kafibara.chatbot: DEBUG
+    org.springframework.security: DEBUG
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} - %msg%n"
+
+# 서버 설정
+server:
+  port: 8080
+  servlet:
+    context-path: /
+
+# Swagger 설정
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-ui.html
+
+# Actuator 설정
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus,env,configprops
+      base-path: /actuator
+  endpoint:
+    health:
+      show-details: when-authorized
+      show-components: always
+  info:
+    env:
+      enabled: true
+    java:
+      enabled: true
+    os:
+      enabled: true
+  metrics:
+    export:
+      prometheus:
+        enabled: true
+
+# 애플리케이션 정보
+info:
+  app:
+    name: Custom Chatbot Service
+    description: AI 챗봇 서비스 - Spring Boot 3.x, Java 21, PostgreSQL 기반
+    version: 1.0.0
+    encoding: UTF-8
+    java:
+      version: 21
