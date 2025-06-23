@@ -1,6 +1,6 @@
 package com.kafibara.chatbot.config;
 
-import com.kafibara.chatbot.security.JwtAuthenticationFilter;
+import com.kafibara.chatbot.config.util.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;

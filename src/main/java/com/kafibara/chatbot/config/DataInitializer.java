@@ -1,7 +1,7 @@
 package com.kafibara.chatbot.config;
 
-import com.kafibara.chatbot.entity.User;
-import com.kafibara.chatbot.repository.UserRepository;
+import com.kafibara.chatbot.user.entity.User;
+import com.kafibara.chatbot.user.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.CommandLineRunner;
